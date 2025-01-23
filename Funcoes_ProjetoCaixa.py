@@ -49,20 +49,39 @@ def verificar_categoria():
 def adicionar_produto():
     if verificar_categoria() is not None:
         produto['produto'] = input("Qual o produto a ser adicionado? ")
-        if produto["produto"] in estoque[0]:
-           index_produto = estoque[0].index(produto["produto"])
-           if categoria ==  estoque[2][index_produto][0] : 
-            produto['quantidade'] = int(input("Qual a quantidade do produto? "))
-            estoque[3][index_produto] += produto["quantidade"]
+        if produto["produto"] in estoque[0]: #verifica se o produto já faz parte do estoque
+           index_produto = estoque[0].index(produto["produto"]) #relaciona o produto com o index
+           if categoria ==  estoque[2][index_produto][0] : #verifica se a categoria digitada corresponde ao produto já adicionado
+            produto['quantidade'] = input("Qual a quantidade do produto? ")
+            if not produto["quantidade"].isdigit(): #verifica se a quantidade digitada é um número
+                print("Quantidade inválida! ")
+                return
+            else:
+                produto["quantidade"] = int(produto["quantidade"]) 
+                estoque[3][index_produto] += produto["quantidade"] #atualiza a quantidade do produto que já estava no estoque
            else:
                print("A categoria do produto não corresponde a ele!")         
-        else:
-            produto['valor'] = float(input("Qual o valor do produto? "))
-            produto['quantidade'] = int(input("Qual a quantidade do produto? "))
-            estoque[0].append(produto['produto'])    
-            estoque[1].append(produto['valor'])
-            estoque[2].append(produto["categoria"])    
-            estoque[3].append(produto['quantidade'])    
+        else: #caso seja um produto novo
+            produto['valor'] = input("Qual o valor do produto? ")
+            try: #tratamento de erro para o valor do produto
+                produto["valor"] = float(produto["valor"])
+                if produto["valor"] < 0:
+                    print("Preço inválido!")
+                    return
+            except ValueError: #caso dê erro de valor
+                print("Preço inválido!")
+                return
+                
+            produto['quantidade'] = input("Qual a quantidade do produto? ")
+            if not produto["quantidade"].isdigit():
+                print("Quantidade inválida! ")
+                return
+            else:
+                produto["quantidade"] = int(produto["quantidade"])
+                estoque[0].append(produto['produto'])    
+                estoque[1].append(produto['valor'])
+                estoque[2].append(produto["categoria"])    
+                estoque[3].append(produto['quantidade'])    
     else:
         return
     
@@ -70,15 +89,24 @@ def vender():
     if verificar_estoque() is not None:
         exibe_estoque()
         produto["produto"] = input("Digite qual produto deseja vender: ")
-        if produto["produto"] not in estoque[0]:
+        if produto["produto"] not in estoque[0]: #verifica se o produto digitado não está no estoque
             print("Não há esse produto no estoque!")
-        else:
-            index_produto = estoque[0].index(produto["produto"])
-            qtd_venda = int(input(f"Digite a quantidade de {produto['produto']} a ser vendida: "))
-            estoque[3][index_produto] -= qtd_venda
-            receita_parcial = qtd_venda * estoque[1][index_produto]
-            receita.append(receita_parcial)
-            vendas.append(qtd_venda)
+        else: #Caso esteja no estoque executa isso:
+            index_produto = estoque[0].index(produto["produto"]) #verifica qual o index do produto
+            qtd_venda = input(f"Digite a quantidade de {produto['produto']} a ser vendida: ")
+            if not qtd_venda.isdigit(): #Verifica se a quantidade digitada não é um número inteiro
+                print("Quantidade inválida!")
+                return
+            else: #Caso for um número inteiro:
+                qtd_venda = int(qtd_venda)
+                if qtd_venda > estoque[3][index_produto]: #Verifica se a quantidade é maior que o estoque
+                    print(f"Quantidade a ser vendida é maior que estoque do produto {estoque[0][index_produto]}!")
+                    return
+                else:
+                    estoque[3][index_produto] -= qtd_venda #diminui a quantidade do estoque com a quantidade vendida
+                    receita_parcial = qtd_venda * estoque[1][index_produto] #atualiza a receita parcial de vendas
+                    receita.append(receita_parcial)
+                    vendas.append(qtd_venda)
             
     else:
         print("Não há produtos para ser vendidos!")

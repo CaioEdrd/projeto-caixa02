@@ -11,7 +11,7 @@ while True:
     print()
     
     if comando == "0":  #Se o usuário digitar 0, exibe os comandos disponíveis
-        print("Comandos disponíveis:\n1 - produto\n2 - Adicionar\n3 - Vender\n4 - Receita\n5 - Valor Total do estoque\n6 - Ver produto por categoria\n7 - Sair")
+        print("Comandos disponíveis:\n1 - Estoque\n2 - Adicionar\n3 - Vender\n4 - Receita\n5 - Valor Total do estoque\n6 - Ver produto por categoria\n7 - Sair")
     
     elif comando == "1":  #Se o usuário digitar 1, exibe o estoque
         Funcoes_ProjetoCaixa.exibe_estoque()
