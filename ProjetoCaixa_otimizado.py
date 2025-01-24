@@ -1,4 +1,4 @@
-import Funcoes_ProjetoCaixa
+import Funcoes_ProjetoCaixa #modularização do arquivo de funções
 
 nome_mercado = input("Digite o nome do seu mercado: ")
 print(f"Bem-Vindo ao controle de caixa {nome_mercado}!")

@@ -131,13 +131,11 @@ def valorestoque():
             valorparcial = estoque[1][i] * estoque[3][i]
             valorfinal +=valorparcial
         print(f"O valor total do estoque é: R$ {valorfinal}")
-    else:
-        print("Não há produtos no estoque!")
+
 
 def categoriaproduto():
     if verificar_estoque() is not None:
         for i in range(len(estoque[2])):
             print(f"Produto - {estoque[0][i]}\t Categoria - {estoque[2][i]}")
-    else:
-        print("Não há produto no estoque!")
+    
         
