@@ -1,4 +1,5 @@
-import Funcoes_ProjetoCaixa, time #modularização do arquivo de funções
+import Funcoes_Caixa_Dict, time #modularização do arquivo de funções
+
 
 nome_mercado = input("Digite o nome do seu mercado: ")
 time.sleep(1)
@@ -10,7 +11,6 @@ time.sleep(1)
 
 while True:
     print("\nCaso deseje visualizar os comandos novamente, digite 0")
-    time.sleep(1)
     comando = input("Digite o número do comando desejado: ")  #O usuário digita o número do comando desejado
     print()
     time.sleep(1)
@@ -20,22 +20,22 @@ while True:
         time.sleep(1)
 
     elif comando == "1":  #Se o usuário digitar 1, exibe o estoque
-        Funcoes_ProjetoCaixa.exibe_estoque()
+        Funcoes_Caixa_Dict.exibe_estoque()
     
     elif comando == "2":  #Se o usuário digitar 2, adiciona um produto ao estoque
-        Funcoes_ProjetoCaixa.adicionar_produto()    
+        Funcoes_Caixa_Dict.adicionar_produto()    
     
     elif comando == "3":  #Se o usuário digitar 3, vende um produto
-        Funcoes_ProjetoCaixa.vender()
+        Funcoes_Caixa_Dict.vender()
     
     elif comando == "4": #Se o usuário digitar 4, mostra a receita e a quantidade das vendas
-        Funcoes_ProjetoCaixa.mostrar_receita()            
+        Funcoes_Caixa_Dict.mostrar_receita()            
     
     elif comando == "5": #Mostra o valor total do estoque
-        Funcoes_ProjetoCaixa.valorestoque()
+        Funcoes_Caixa_Dict.valorestoque()
     
     elif comando == "6": #Mostra os produtos e categorias
-        Funcoes_ProjetoCaixa.categoriaproduto()
+        Funcoes_Caixa_Dict.categoriaproduto()
     
     elif comando == "7":
         break
