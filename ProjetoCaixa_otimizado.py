@@ -1,12 +1,12 @@
 import Funcoes_Caixa_Dict, time #modularização do arquivo de funções
 
 
-nome_mercado = input("Digite o nome do seu mercado: ")
+nome_mercado = input("Digite o nome do seu mercado: ").capitalize()
 time.sleep(1)
 print(f"Bem-Vindo ao controle de caixa {nome_mercado}!")
 time.sleep(1)
 
-print("0 - Help : Exibe todos os comandos disponíveis, como:\n1 - Estoque\n2 - Adicionar\n3 - Vender\n4 - Receita\n5 - Valor Total do estoque\n6 - Ver produto por categoria\n7 - Sair")
+print("0 - Help : Exibe todos os comandos disponíveis, como:\n1 - Estoque\n2 - Adicionar\n3 - Vender\n4 - Receita\n5 - Valor Total do estoque\n6 - Ver produto com categoria\n7 - Sair")
 time.sleep(1)
 
 while True:
@@ -16,7 +16,7 @@ while True:
     time.sleep(1)
     
     if comando == "0":  #Se o usuário digitar 0, exibe os comandos disponíveis
-        print("Comandos disponíveis:\n1 - Estoque\n2 - Adicionar\n3 - Vender\n4 - Receita\n5 - Valor Total do estoque\n6 - Ver produto por categoria\n7 - Sair")
+        print("Comandos disponíveis:\n1 - Estoque\n2 - Adicionar\n3 - Vender\n4 - Receita\n5 - Valor Total do estoque\n6 - Ver produto com categoria\n7 - Sair")
         time.sleep(1)
 
     elif comando == "1":  #Se o usuário digitar 1, exibe o estoque
