@@ -1,14 +1,14 @@
-import json, requests, time # bibliotecas
+import json, requests, time,Funcoes_Caixa_Dict # bibliotecas
 
 
-valor = 20 # simulando valor de um produto qualquer/ puxar do dicionário
+# valor_teste = 20 # simulando valor de um produto qualquer/ puxar do dicionário
 
-while True: # evitando erros de digitação
+def conversao(): # evitando erros de digitação
     print("""Escolha a moeda:
-    1.dolar
-    2.euro
-    3.libra
-    4.iene  """)
+    1.Dolar
+    2.Euro
+    3.Libra
+    4.Iene  """)
     time.sleep(1)
 
     # escolha da moeda
@@ -18,48 +18,51 @@ while True: # evitando erros de digitação
     if choice == 'DOLAR' or choice == '1':
         moeda = 'USDBRL'
         uni = 'dolar'
-        break
     elif choice == 'EURO' or choice == '2':
         moeda = 'EURBRL'
         uni = 'euro'
-        break
     elif choice == 'LIBRA' or choice == '3':
         moeda = 'GBPBRL'
         uni = 'libra'
-        break
     elif choice == 'IENE' or choice == '4':
         moeda = 'JPYBRL'
         uni = 'iene'
-        break
     else:
         print('Moeda inválida!')
+        
 
-# buscando infos na api
-url = 'https://economia.awesomeapi.com.br/json/last/'+ moeda[0:3] +'-'+ moeda[3:6]
-cotacao = requests.get(url)
-dic = cotacao.json()
+    #Buscando infos na api
+    url = 'https://economia.awesomeapi.com.br/json/last/'+ moeda[0:3] +'-'+ moeda[3:6]
 
-# tratamento de infos
-vlr = float(dic[moeda]["bid"]) # convertendo valor de str para float
+    #Capturando a cotação
+    cotacao = requests.get(url)
 
-print(f'O valor atual do {uni} é :{vlr:.2f}') # mostrando valor da unidade da moeda escolhida
-time.sleep(1)
+    #Extraindo a cotação e jogando no JSON
+    dic = cotacao.json()
 
-cnv = vlr*valor # convertendo moeda
+    #Tratamento de infos
+    valor_moeda = float(dic[moeda]["bid"]) # convertendo valor de str para float
 
-print(f'O valor convertido de real para {uni} é {cnv:.2f}') # mostrando conversão
-time.sleep(1)
+    print(f'O valor atual do {uni} é :{valor_moeda:.2f}') # Mostrando valor da unidade da moeda escolhida
+    time.sleep(1)
 
-# informações adicionais
-print()
-print('Informações adicionais')
-time.sleep(1)
-print()
-data_hora = dic[moeda]["create_date"]
-print('Última cotação em:')
-time.sleep(1)
-print()
-print(f'dia: {data_hora[8:10]}/{data_hora[5:7]}/{data_hora[0:4]}')
-time.sleep(1)
-print()
-print(f'Horário:{data_hora[10:19]}')
+    Funcoes_Caixa_Dict.verifica_produto_estoque()
+    global conversao_moeda
+    conversao_moeda = Funcoes_Caixa_Dict.estoque[Funcoes_Caixa_Dict.index_produto_estoque]['valor'] / valor_moeda
+    
+    print(f'O valor a ser pago é R$ {conversao_moeda:.2f} cada') # mostrando conversão
+    time.sleep(1)
+
+    # informações adicionais
+    print()
+    print('Informações adicionais')
+    time.sleep(1)
+    print()
+    data_hora = dic[moeda]["create_date"]
+    print('Última cotação em:')
+    time.sleep(1)
+    print()
+    print(f'Data: {data_hora[8:10]}/{data_hora[5:7]}/{data_hora[0:4]}')
+    time.sleep(1)
+    print()
+    print(f'Horário:{data_hora[10:19]}')

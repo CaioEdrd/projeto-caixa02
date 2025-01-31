@@ -1,4 +1,5 @@
 from time import sleep
+import Api_Conversão
 
 estoque = []    
     
@@ -24,6 +25,8 @@ def exibe_estoque():
             sleep(1)
             if estoque[i]['quantidade'] < 5:
                 print(f"\"{estoque[i]['nome-produto']}\" está com baixo estoque, necessário reabastecimento!")
+    else:
+        print("Estoque vazio!")
 
 def verificar_categoria():
     global categoria
@@ -39,9 +42,9 @@ def verificar_categoria():
         return None
         
 def verifica_produto_estoque():
+    global index_produto_estoque
     for i in range(len(estoque)):
         if nome_produto == estoque[i]['nome-produto']:
-            global index_produto_estoque
             index_produto_estoque = i
             return index_produto_estoque
 
@@ -110,8 +113,10 @@ def qtd_produtos():
         real_estoque = produtos_estoque - venda_estoque
         return real_estoque
 
+
 def vender():
     global nome_produto
+    global qtd_venda
     if verificar_estoque() is not None:
         exibe_estoque()
         nome_produto = input("Digite qual produto deseja vender: ")
@@ -132,10 +137,20 @@ def vender():
                     print("A quantidade digitada não é válida!")
                     sleep(1)
                     return
-            estoque[index_produto_estoque]['quantidade'] -= qtd_venda
-            receita_parcial = qtd_venda * estoque[index_produto_estoque]['valor']
-            receita.append(receita_parcial)
-            vendas.append(qtd_venda) 
+                else:
+                    moeda_usuario = input("Sua moeda é o REAL ?\n [S]im\t[N]ão : ").upper()
+                    if moeda_usuario == 'N' or moeda_usuario == 'NAO' or moeda_usuario == 'NÃO':
+                        Api_Conversão.conversao()
+                        estoque[index_produto_estoque]['quantidade'] -= qtd_venda
+                        receita_parcial = (qtd_venda * Api_Conversão.conversao_moeda)
+                        print("A receita obtida com essa venda foi de: R$ {receita_parcial}")
+                        receita.append(receita_parcial)
+                        vendas.append(qtd_venda) 
+                    else:
+                        estoque[index_produto_estoque]['quantidade'] -= qtd_venda
+                        receita_parcial = qtd_venda * estoque[index_produto_estoque]['valor']
+                        receita.append(receita_parcial)
+                        vendas.append(qtd_venda) 
 
 def mostrar_receita():
     if len(vendas) > 0:
