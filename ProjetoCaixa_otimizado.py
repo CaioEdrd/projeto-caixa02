@@ -1,5 +1,5 @@
 import Funcoes_Caixa_Dict, time #modularização do arquivo de funções
-
+print("Trabalho realizado por: Adriel Ravi de Medeiros Pereira\nCaio Eduardo Moreira da Silva\nIsmael Braga de Oliveira\nLuis Gustavo da Silva Marques\nMatheus Emmanuel de Oliveira Cruz")
 
 nome_mercado = input("Digite o nome do seu mercado: ").capitalize()
 time.sleep(1)
