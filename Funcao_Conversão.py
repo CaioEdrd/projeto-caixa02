@@ -1,8 +1,5 @@
 import json, requests, time,Funcoes_Caixa_Dict # bibliotecas
 
-
-# valor_teste = 20 # simulando valor de um produto qualquer/ puxar do dicionário
-
 def conversao(): # evitando erros de digitação
     print("""Escolha a moeda:
     1.Dolar
@@ -48,6 +45,7 @@ def conversao(): # evitando erros de digitação
 
     Funcoes_Caixa_Dict.verifica_produto_estoque()
     global conversao_moeda
+    #conversão da moeda do usuário com o REAL
     conversao_moeda = Funcoes_Caixa_Dict.estoque[Funcoes_Caixa_Dict.index_produto_estoque]['valor'] / valor_moeda
     
     print(f'O valor a ser pago é R$ {conversao_moeda:.2f} cada') # mostrando conversão

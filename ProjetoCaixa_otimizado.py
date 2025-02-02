@@ -1,9 +1,12 @@
 import Funcoes_Caixa_Dict, time #modularização do arquivo de funções
-print("Trabalho realizado por: Adriel Ravi de Medeiros Pereira\nCaio Eduardo Moreira da Silva\nIsmael Braga de Oliveira\nLuis Gustavo da Silva Marques\nMatheus Emmanuel de Oliveira Cruz")
+
+print("\nTrabalho realizado por:\nAdriel Ravi de Medeiros Pereira\nCaio Eduardo Moreira da Silva\nIsmael Braga de Oliveira\nLuis Gustavo da Silva Marques\nMatheus Emmanuel de Oliveira Cruz\n")
 
 nome_mercado = input("Digite o nome do seu mercado: ")
 time.sleep(1)
-print(f"Bem-Vindo ao controle de caixa {nome_mercado.capitalize()}!")
+
+Funcoes_Caixa_Dict.saudacao(mercado=nome_mercado)
+
 time.sleep(1)
 
 print("0 - Help : Exibe todos os comandos disponíveis, como:\n1 - Estoque\n2 - Adicionar\n3 - Vender\n4 - Receita\n5 - Valor Total do estoque\n6 - Ver produto por categoria\n7 - Sair")
