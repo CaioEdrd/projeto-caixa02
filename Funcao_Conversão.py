@@ -26,6 +26,7 @@ def conversao(): # evitando erros de digitação
         uni = 'iene'
     else:
         print('Moeda inválida!')
+        return None
         
 
     #Buscando infos na api

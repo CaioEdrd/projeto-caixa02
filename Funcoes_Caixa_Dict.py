@@ -153,12 +153,13 @@ def vender(): #Vender um produto do estoque
                 else:
                     moeda_usuario = input("Sua moeda é o REAL ?\n [S]im\t[N]ão : ").upper() #solicita a moeda do usuário para conversão
                     if moeda_usuario == 'N' or moeda_usuario == 'NAO' or moeda_usuario == 'NÃO':
-                        Funcao_Conversão.conversao() #Chama a função conversão que está com uma API
-                        estoque[index_produto_estoque]['quantidade'] -= qtd_venda
-                        receita_parcial = (qtd_venda * Funcao_Conversão.conversao_moeda) #atualiza a receita parcial já com o valor convertido
-                        print(f"A receita obtida com essa venda foi de: R$ {receita_parcial}")
-                        receita.append(receita_parcial)
-                        vendas.append(qtd_venda) 
+                        if Funcao_Conversão.conversao() is not None: #Chama a função conversão que está com uma API e verifica se não é None
+                            estoque[index_produto_estoque]['quantidade'] -= qtd_venda
+                            receita_parcial = (qtd_venda * Funcao_Conversão.conversao_moeda) #atualiza a receita parcial já com o valor convertido
+                            print(f"A receita obtida com essa venda foi de: R$ {receita_parcial}")
+                            receita.append(receita_parcial)
+                            vendas.append(qtd_venda)
+                    
                     else: #Caso a moeda seja o REAL
                         estoque[index_produto_estoque]['quantidade'] -= qtd_venda
                         receita_parcial = qtd_venda * estoque[index_produto_estoque]['valor']
