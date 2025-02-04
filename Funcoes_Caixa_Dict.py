@@ -65,7 +65,7 @@ def verifica_produto_estoque(): #Verifica se o produto digitado já está no est
 def adicionar_produto(): #Adicionar um produto ao estoque
     if verificar_categoria() is not None: #Verifica se a categoria é válida
         global nome_produto
-        nome_produto = input("Qual o produto a ser adicionado? ")
+        nome_produto = input("Qual o produto a ser adicionado? ").capitalize()
         sleep(1)
         if verifica_produto_estoque() is None: #Verifica se já tem o produto no estoque
             valor = input("Qual o valor do produto: ") 
@@ -90,7 +90,7 @@ def adicionar_produto(): #Adicionar um produto ao estoque
                 quantidade = int(quantidade)
             qtd_estoque.append(quantidade)
             nome_produto = {    #Dicionário do produto
-            'nome-produto' : nome_produto,
+            'nome-produto' : nome_produto.capitalize(),
             'valor' : valor,
             'categoria' : categoria,
             'quantidade' : quantidade,}
@@ -132,7 +132,7 @@ def vender(): #Vender um produto do estoque
     global qtd_venda
     if verificar_estoque() is not None: #Verifica se há produto no estoque
         exibe_estoque()
-        nome_produto = input("Digite qual produto deseja vender: ")
+        nome_produto = input("Digite qual produto deseja vender: ").capitalize()
         sleep(1)
         if verifica_produto_estoque() is None: #Verifica se o produto digitado está no estoque
             print("Não há esse produto no estoque!")
@@ -153,19 +153,20 @@ def vender(): #Vender um produto do estoque
                 else:
                     moeda_usuario = input("Sua moeda é o REAL ?\n [S]im\t[N]ão : ").upper() #solicita a moeda do usuário para conversão
                     if moeda_usuario == 'N' or moeda_usuario == 'NAO' or moeda_usuario == 'NÃO':
-                        if Funcao_Conversão.conversao() is not None: #Chama a função conversão que está com uma API e verifica se não é None
+                        if Funcao_Conversão.verificacao_moeda() is not None: #verifica se a moeda digitada é válida
+                            Funcao_Conversão.conversao()
                             estoque[index_produto_estoque]['quantidade'] -= qtd_venda
                             receita_parcial = (qtd_venda * Funcao_Conversão.conversao_moeda) #atualiza a receita parcial já com o valor convertido
                             print(f"A receita obtida com essa venda foi de: R$ {receita_parcial}")
                             receita.append(receita_parcial)
                             vendas.append(qtd_venda)
-                    
-                    else: #Caso a moeda seja o REAL
+                    if moeda_usuario == 'S' or moeda_usuario == 'SIM': #Caso a moeda seja o Real
                         estoque[index_produto_estoque]['quantidade'] -= qtd_venda
                         receita_parcial = qtd_venda * estoque[index_produto_estoque]['valor']
                         receita.append(receita_parcial)
-                        vendas.append(qtd_venda) 
-
+                        vendas.append(qtd_venda)
+                    else:
+                        print("Resposta inválida")
 def mostrar_receita(): #Mostra as vendas
     if len(vendas) > 0:
         receita_total = 0

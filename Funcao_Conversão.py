@@ -1,6 +1,10 @@
+from glob import glob
 import json, requests, time,Funcoes_Caixa_Dict # bibliotecas
 
-def conversao(): # evitando erros de digitação
+def verificacao_moeda():
+    global uni
+    global moeda
+
     print("""Escolha a moeda:
     1.Dolar
     2.Euro
@@ -15,21 +19,31 @@ def conversao(): # evitando erros de digitação
     if choice == 'DOLAR' or choice == '1':
         moeda = 'USDBRL'
         uni = 'dolar'
+        return moeda
     elif choice == 'EURO' or choice == '2':
         moeda = 'EURBRL'
         uni = 'euro'
+        return moeda
+
     elif choice == 'LIBRA' or choice == '3':
         moeda = 'GBPBRL'
         uni = 'libra'
+        return moeda
+
     elif choice == 'IENE' or choice == '4':
         moeda = 'JPYBRL'
         uni = 'iene'
+        return moeda
+
     else:
         print('Moeda inválida!')
         return None
-        
+        #Buscando infos na api
 
-    #Buscando infos na api
+def conversao(): # evitando erros de digitação
+    global valor_moeda
+    global dic
+    
     url = 'https://economia.awesomeapi.com.br/json/last/'+ moeda[0:3] +'-'+ moeda[3:6]
 
     #Capturando a cotação
@@ -39,8 +53,7 @@ def conversao(): # evitando erros de digitação
     dic = cotacao.json()
 
     #Tratamento de infos
-    valor_moeda = float(dic[moeda]["bid"]) # convertendo valor de str para float
-
+    valor_moeda = float(dic[moeda]["bid"]) # convertendo valor de str para float    
     print(f'O valor atual do {uni} é :{valor_moeda:.2f}') # Mostrando valor da unidade da moeda escolhida
     time.sleep(1)
 
