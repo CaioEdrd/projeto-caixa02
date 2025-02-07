@@ -37,7 +37,7 @@ while True:
     elif comando == "5": #Mostra o valor total do estoque
         Funcoes_Caixa_Dict.valorestoque()
     
-    elif comando == "6": #Mostra os produtos e categorias
+    elif comando == "6": #Mostra os produtos por categorias
         Funcoes_Caixa_Dict.categoriaproduto()
     
     elif comando == "7":

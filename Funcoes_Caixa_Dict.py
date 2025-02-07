@@ -53,28 +53,23 @@ def verificar_categoria(): #Verifica se a categoria é válida
     global categoria
     global nome_categoria
     categoria = input("Digite a primeira letra da categoria do produto ([A]limentos, [B]ebidas, [L]impeza, [H]igiene, [O]utros): ").lower()
-    sleep(1)
     if categoria in ['a', 'b', 'l', 'h', 'o']: #verifica se a categoria digitada está na lista   
         print("Categoria válida")
+        sleep(0.5)
         if categoria == 'a':
             nome_categoria = "Alimento"
-        sleep(1)
 
         if categoria == 'b':
             nome_categoria = "Bebida"
-        sleep(1)
 
         if categoria == 'l':
             nome_categoria = "Limpeza"
-        sleep(1)
 
         if categoria == 'h':
             nome_categoria = "Higiene"
-        sleep(1)
 
         if categoria == 'o':
-            nome_categoria = "Outros"
-        sleep(1)       
+            nome_categoria = "Outros"       
 
         return categoria       
     else:
@@ -234,31 +229,36 @@ def valorestoque(): #Mostra o valor do estoque
         print(f"O valor total do estoque é: R$ {valorfinal}")
         sleep(1)
 
-def categoriaproduto(): #Mostra os produtos e suas categorias
+def categoriaproduto(): #Mostra os produtos por categorias
     if verificar_estoque() is not None:
         if len(alimentos) > 0:
             print('Categoria dos alimentos:')
             for i in range(len(alimentos)):
                 print(alimentos[i]['nome-produto'])
+                sleep(0.5)
             sleep(1)
         if len(bebidas) > 0:
-            print('Categoria das bebidas:')
+            print('\nCategoria das bebidas:')
             for i in range(len(bebidas)):
                 print(bebidas[i]['nome-produto'])
+                sleep(0.5)
             sleep(1)
         if len(limpeza) > 0:
-            print('Categoria dos limpeza:')
+            print('\nCategoria Limpeza:')
             for i in range(len(limpeza)):
                 print(limpeza[i]['nome-produto'])
+                sleep(0.5)
             sleep(1)
         if len(higiene) > 0:
-            print('Categoria dos higiene:')
+            print('\nCategoria Higiene:')
             for i in range(len(higiene)):
                 print(higiene[i]['nome-produto'])
+                sleep(0.5)
             sleep(1)
         if len(outros) > 0:
-            print('Itens de outras categorias:')
+            print('\nItens de outras categorias:')
             for i in range(len(outros)):
                 print(outros[i]['nome-produto'])
+                sleep(0.5)
             sleep(1)
        
