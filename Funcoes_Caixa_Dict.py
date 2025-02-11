@@ -42,7 +42,7 @@ def exibe_estoque(): #Mostra os produtos do estoque
         print(f"Estoque com {len(estoque)} produto(s)!")
         sleep(1)
         for i in range(len(estoque)): #Mostra cada produto
-            print(f"Produto - {estoque[i]['nome-produto']}\t Valor - R$ {estoque[i]['valor']}\t Categoria - {estoque[i]['categoria']}\t Quantidade - {estoque[i]['quantidade']}")
+            print(f"Produto - {estoque[i]['nome-produto']}\t Valor - R$ {estoque[i]['valor']:.2f}\t Categoria - {estoque[i]['categoria']}\t Quantidade - {estoque[i]['quantidade']}")
             sleep(1) 
             if estoque[i]['quantidade'] < 5: #Caso a quantidade seja menor que 5 mostrará essa mensagem
                 print(f"\"{estoque[i]['nome-produto']}\" está com baixo estoque, necessário reabastecimento!")
@@ -192,7 +192,7 @@ def vender(): #Vender um produto do estoque
                                 Funcao_Conversão.conversao()
                                 estoque[index_produto_estoque]['quantidade'] -= qtd_venda
                                 receita_parcial = (qtd_venda * Funcao_Conversão.conversao_moeda) #atualiza a receita parcial já com o valor convertido
-                                print(f"A receita obtida com essa venda foi de: R$ {receita_parcial}")
+                                print(f"A receita obtida com essa venda foi de: R$ {receita_parcial:.2f}")
                                 receita.append(receita_parcial)
                                 vendas.append(qtd_venda)
                                 break
@@ -214,7 +214,7 @@ def mostrar_receita(): #Mostra as vendas
             receita_total += receita[i]
         print(f"A quantidade total de vendas foi: {nvendas}")
         sleep(1)
-        print(f"A receita total de vendas é: R$ {receita_total}")
+        print(f"A receita total de vendas é: R$ {receita_total:.2f}")
         sleep(1)
     else:
         print("Não há vendas!")
@@ -226,7 +226,7 @@ def valorestoque(): #Mostra o valor do estoque
         for i in range(len(estoque)):
             valorparcial = estoque[i]['valor'] * estoque[i]['quantidade']
             valorfinal += valorparcial
-        print(f"O valor total do estoque é: R$ {valorfinal}")
+        print(f"O valor total do estoque é: R$ {valorfinal:.2f}")
         sleep(1)
 
 def categoriaproduto(): #Mostra os produtos por categorias
